@@ -60,12 +60,21 @@ Result<IpRange> IpRange::parse(const QString& tokenRaw) {
         if (a.isNull())
             return Result<IpRange>::err(QStringLiteral("invalid range start: %1").arg(token));
 
-        QHostAddress b(parts[1].trimmed());
-        if (b.isNull() && a.protocol() == QAbstractSocket::IPv4Protocol) {
+        // Short form "a.b.c.d-N" (N = final octet only) is detected from the
+        // token shape, not by QHostAddress("N") being null (which is not
+        // guaranteed across platforms).
+        const QString endTok = parts[1].trimmed();
+        const bool shortForm = a.protocol() == QAbstractSocket::IPv4Protocol &&
+                               !endTok.contains(QLatin1Char('.')) &&
+                               !endTok.contains(QLatin1Char(':'));
+        QHostAddress b;
+        if (shortForm) {
             bool ok = false;
-            const uint lastOctet = parts[1].trimmed().toUInt(&ok);
+            const uint lastOctet = endTok.toUInt(&ok);
             if (ok && lastOctet <= 255)
                 b = QHostAddress((toV4(a) & 0xFFFFFF00u) | lastOctet);
+        } else {
+            b = QHostAddress(endTok);
         }
         if (b.isNull())
             return Result<IpRange>::err(QStringLiteral("invalid range end: %1").arg(token));
