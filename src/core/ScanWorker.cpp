@@ -18,8 +18,8 @@ namespace pacn {
 // One host: liveness probe + (if alive) full enrichment. Runs in the pool.
 class HostTask : public QRunnable {
 public:
-    HostTask(ScanWorker* worker, QHostAddress ip, QSemaphore* slots)
-        : worker_(worker), ip_(std::move(ip)), slots_(slots) {
+    HostTask(ScanWorker* worker, QHostAddress ip, QSemaphore* permits)
+        : worker_(worker), ip_(std::move(ip)), slots_(permits) {
         setAutoDelete(true);
     }
 
@@ -111,7 +111,7 @@ void ScanWorker::run() {
     Logger::instance().info(QStringLiteral("scan"),
                             QStringLiteral("Starting scan of %1 host(s)").arg(total_));
 
-    QSemaphore slots(qMax(1, config_.concurrency()));
+    QSemaphore permits(qMax(1, config_.concurrency()));
 
     for (const IpRange& range : config_.targets) {
         if (cancel_.load()) break;
@@ -125,12 +125,12 @@ void ScanWorker::run() {
             waitWhilePaused();
             if (cancel_.load()) break;
 
-            slots.acquire();
+            permits.acquire();
             if (cancel_.load()) {
-                slots.release();
+                permits.release();
                 break;
             }
-            pool_.start(new HostTask(this, cur, &slots));
+            pool_.start(new HostTask(this, cur, &permits));
             ++produced;
 
             if (cap != 0 && produced >= cap) break;

@@ -4,6 +4,8 @@
 #include <QtMath>
 #include <algorithm>
 #include <map>
+#include <utility>
+#include <vector>
 
 namespace pacn {
 
