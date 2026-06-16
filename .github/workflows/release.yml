@@ -80,7 +80,8 @@ jobs:
           find build -maxdepth 1 -type f \
             \( -name '*.zip' -o -name '*.exe' -o -name '*.dmg' \
                -o -name '*.deb' -o -name '*.rpm' \) -exec cp {} dist/ \; || true
-          find packaging/_out -maxdepth 1 -name '*.AppImage' -exec cp {} dist/ \; || true
+          # Only the app's AppImage — never the linuxdeploy tool binaries.
+          find packaging/_out -maxdepth 1 -iname 'PacNScanner*.AppImage' -exec cp {} dist/ \; || true
           ls -la dist || true
 
       - name: Upload to release
