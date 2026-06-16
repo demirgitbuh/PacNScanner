@@ -12,10 +12,7 @@ ScanEngine::ScanEngine(QObject* parent) : QObject(parent) {
     qRegisterMetaType<pacn::ScanSummary>("pacn::ScanSummary");
 }
 
-ScanEngine::~ScanEngine() {
-    if (worker_) worker_->requestCancel();
-    teardown();
-}
+ScanEngine::~ScanEngine() { teardown(); }
 
 void ScanEngine::setProbeFactory(std::shared_ptr<IProbeFactory> factory) {
     factory_ = std::move(factory);
@@ -29,11 +26,12 @@ void ScanEngine::setConfig(const ScanConfig& config) { config_ = config; }
 
 void ScanEngine::start() {
     if (running_) return;
+    teardown();  // clean up any previous (finished) run before starting a new one
     if (!factory_) factory_ = std::make_shared<DefaultProbeFactory>();
     if (!platform_) platform_ = createPlatformServices();
 
     worker_ = new ScanWorker(config_, factory_, platform_);
-    thread_ = new QThread(this);
+    thread_ = new QThread;  // no parent: lifetime managed explicitly in teardown()
     worker_->moveToThread(thread_);
 
     connect(thread_, &QThread::started, worker_, &ScanWorker::run);
@@ -52,6 +50,9 @@ void ScanEngine::start() {
             Qt::QueuedConnection);
     connect(worker_, &ScanWorker::failed, this, &ScanEngine::failed, Qt::QueuedConnection);
 
+    // When the worker finishes, stop the thread's event loop. The thread object
+    // and worker are joined and deleted synchronously in teardown() (next start
+    // or destruction), which avoids cross-thread / use-after-free races.
     connect(worker_, &ScanWorker::finished, this,
             [this](const ScanSummary& s) {
                 running_ = false;
@@ -59,16 +60,6 @@ void ScanEngine::start() {
                 if (thread_) thread_->quit();
             },
             Qt::QueuedConnection);
-
-    // Canonical worker-thread teardown: delete both once the loop stops.
-    connect(thread_, &QThread::finished, worker_, &QObject::deleteLater);
-    connect(thread_, &QThread::finished, this, [this] {
-        if (thread_) {
-            thread_->deleteLater();
-            thread_ = nullptr;
-        }
-        worker_ = nullptr;
-    });
 
     running_ = true;
     thread_->start();
@@ -87,15 +78,19 @@ void ScanEngine::cancel() {
 }
 
 void ScanEngine::teardown() {
-    // Synchronous stop used only from the destructor (event loop not pumping).
-    if (thread_) {
-        thread_->quit();
-        thread_->wait();
-        delete thread_;
-        thread_ = nullptr;
+    // Synchronous, deterministic stop. Safe to call when idle (no-op) or while a
+    // scan is running (cancels, joins, then deletes).
+    if (!thread_) {
+        running_ = false;
+        return;
     }
-    delete worker_;
+    if (worker_) worker_->requestCancel();
+    thread_->quit();
+    thread_->wait();
+    delete worker_;  // thread joined; worker is inert and has no live timers
     worker_ = nullptr;
+    delete thread_;
+    thread_ = nullptr;
     running_ = false;
 }
 

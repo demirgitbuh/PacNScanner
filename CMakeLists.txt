@@ -37,6 +37,9 @@ option(PACN_WITH_NPCAP  "Enable optional Npcap raw/ARP scanning"   OFF)
 # --- Qt ----------------------------------------------------------------------
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Network Sql)
 qt_standard_project_setup()
+# qt_standard_project_setup() enables AUTOMOC/AUTOUIC but NOT AUTORCC; turn it on
+# so the assets/resources.qrc added to app/cli/tests is actually compiled in.
+set(CMAKE_AUTORCC ON)
 
 set(PACN_HAVE_GUI FALSE)
 if(PACN_BUILD_GUI)
@@ -75,7 +78,8 @@ target_include_directories(pacn_config INTERFACE
 if(MSVC)
   target_compile_options(pacn_config INTERFACE /utf-8 /EHsc /W4 /permissive-)
   target_compile_definitions(pacn_config INTERFACE
-    NOMINMAX WIN32_LEAN_AND_MEAN _CRT_SECURE_NO_WARNINGS)
+    NOMINMAX WIN32_LEAN_AND_MEAN _CRT_SECURE_NO_WARNINGS
+    WINVER=0x0A00 _WIN32_WINNT=0x0A00)
 else()
   target_compile_options(pacn_config INTERFACE -Wall -Wextra)
 endif()
