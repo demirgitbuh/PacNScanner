@@ -15,6 +15,6 @@ inline constexpr const char* kOrgName      = "@PACN_ORG_NAME@";
 inline constexpr const char* kGitHubRepo   = "@PACN_GITHUB_REPO@";
 inline constexpr const char* kHomepageUrl  = "@PROJECT_HOMEPAGE_URL@";
 
-inline QString versionString() { return QStringLiteral(kVersionString); }
+inline QString versionString() { return QString::fromLatin1(kVersionString); }
 
 }  // namespace pacn
