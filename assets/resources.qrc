@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/">
+    <file alias="logo.svg">logo.svg</file>
+    <file alias="app.qss">app.qss</file>
+    <file alias="oui.txt">data/oui.txt</file>
+    <file alias="services.txt">data/services.txt</file>
+  </qresource>
+</RCC>

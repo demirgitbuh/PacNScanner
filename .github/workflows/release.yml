@@ -1,0 +1,91 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+      - '20[0-9][0-9].*'   # CalVer, e.g. 2026.7.0
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Package (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-14 ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.7.3'
+          cache: true
+
+      - name: Set up Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
+
+      - name: Set up MSVC (Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure
+        run: >
+          cmake -S . -B build -G Ninja
+          -DCMAKE_BUILD_TYPE=Release
+          -DPACN_BUILD_TESTS=OFF
+          -DPACN_WITH_NPCAP=OFF
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      # ---- Windows packages ----
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install nsis -y --no-progress
+          cd build
+          cpack -G ZIP
+          cpack -G NSIS
+
+      # ---- macOS packages ----
+      - name: Package (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          cd build
+          cpack -G DragNDrop || cpack -G ZIP
+
+      # ---- Linux packages ----
+      - name: Package (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm file libfuse2
+          cd build
+          cpack -G DEB || true
+          cpack -G RPM || true
+          cd ..
+          bash packaging/build-appimage.sh build || true
+
+      - name: Collect artifacts
+        shell: bash
+        run: |
+          mkdir -p dist
+          find build -maxdepth 1 -type f \
+            \( -name '*.zip' -o -name '*.exe' -o -name '*.dmg' \
+               -o -name '*.deb' -o -name '*.rpm' \) -exec cp {} dist/ \; || true
+          find packaging/_out -maxdepth 1 -name '*.AppImage' -exec cp {} dist/ \; || true
+          ls -la dist || true
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          fail_on_unmatched_files: false
+          generate_release_notes: true

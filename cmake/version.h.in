@@ -1,0 +1,20 @@
+// Generated from cmake/version.h.in — do not edit.
+#pragma once
+
+#include <QString>
+
+namespace pacn {
+
+inline constexpr const char* kVersionString = "@PACN_VERSION@";
+inline constexpr int kVersionYear  = @PACN_VERSION_YEAR@;
+inline constexpr int kVersionMonth = @PACN_VERSION_MONTH@;
+inline constexpr int kVersionPatch = @PACN_VERSION_PATCH@;
+
+inline constexpr const char* kAppName      = "@PACN_APP_NAME@";
+inline constexpr const char* kOrgName      = "@PACN_ORG_NAME@";
+inline constexpr const char* kGitHubRepo   = "@PACN_GITHUB_REPO@";
+inline constexpr const char* kHomepageUrl  = "@PROJECT_HOMEPAGE_URL@";
+
+inline QString versionString() { return QStringLiteral(kVersionString); }
+
+}  // namespace pacn

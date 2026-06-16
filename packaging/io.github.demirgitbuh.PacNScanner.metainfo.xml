@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.demirgitbuh.PacNScanner</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>PacNScanner</name>
+  <summary>Fast, modern local network scanner</summary>
+  <description>
+    <p>
+      PacNScanner discovers devices on your local network, inventories their open ports and
+      services, estimates device types and operating systems, and highlights basic security
+      risks — with a fast, system-themed dashboard for home users, sysadmins and security
+      professionals.
+    </p>
+    <p>Privacy-first: no telemetry, all data stays on your device.</p>
+  </description>
+  <launchable type="desktop-id">pacnscanner.desktop</launchable>
+  <url type="homepage">https://github.com/demirgitbuh/PacNScanner</url>
+  <url type="bugtracker">https://github.com/demirgitbuh/PacNScanner/issues</url>
+  <provides>
+    <binary>pacnscanner</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>

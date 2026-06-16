@@ -1,0 +1,48 @@
+# Build
+/build/
+/build-*/
+/out/
+/cmake-build-*/
+*.user
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+_deps/
+
+# Qt
+*.qmlc
+*.jsc
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qm
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Packaging output
+/packaging/_out/
+*.AppImage
+*.dmg
+*.msi
+*.deb
+*.rpm
+
+# Local runtime data
+*.sqlite
+*.sqlite-journal
+*.log

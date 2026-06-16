@@ -1,0 +1,190 @@
+# PacNScanner curated OUI database (subset).
+# Format: <6 hex OUI><TAB><vendor>
+# The full IEEE registry (oui.csv) can be dropped next to this file and will be
+# loaded automatically by VendorLookup when present.
+000C29	VMware, Inc.
+005056	VMware, Inc.
+080027	Oracle VirtualBox
+0A0027	Oracle VirtualBox
+525400	QEMU/KVM Virtual NIC
+00155D	Microsoft Hyper-V
+001C42	Parallels, Inc.
+F0DEF1	Wistron / Laptop
+B827EB	Raspberry Pi Foundation
+DCA632	Raspberry Pi Trading
+E45F01	Raspberry Pi Trading
+2CCF67	Raspberry Pi Trading
+D83ADD	Raspberry Pi Trading
+3C2200	Espressif (ESP32/ESP8266)
+A4CF12	Espressif Inc.
+240AC4	Espressif Inc.
+ECFABC	Espressif Inc.
+7C9EBD	Espressif Inc.
+001A11	Google, Inc.
+3C5AB4	Google, Inc.
+F4F5D8	Google, Inc.
+DA A1 19	Google, Inc.
+F88FCA	Google (Nest)
+001788	Philips Lighting (Hue)
+ECB5FA	Philips Lighting
+0017880	Philips
+000D4B	Roku, Inc.
+B0A737	Roku, Inc.
+CC6DA0	Roku, Inc.
+D0176A	Samsung Electronics
+8425DB	Samsung Electronics
+F008F1	Samsung Electronics
+5CF6DC	Samsung Electronics
+E8508B	Samsung Electronics
+A0CBFD	Samsung Electronics
+001D25	Samsung Electronics
+F0272D	Apple, Inc.
+A45E60	Apple, Inc.
+3C0754	Apple, Inc.
+ACBC32	Apple, Inc.
+F0989D	Apple, Inc.
+D0817A	Apple, Inc.
+8C8590	Apple, Inc.
+C82A14	Apple, Inc.
+E0B9BA	Apple, Inc.
+001451	Apple, Inc.
+B8E856	Apple, Inc.
+00CDFE	Apple, Inc.
+000393	Apple, Inc.
+3CD0F8	Apple, Inc.
+FCFC48	Apple, Inc.
+6C4008	Apple, Inc.
+F4F15A	Apple, Inc.
+00163E	Xensource (Xen VM)
+001B21	Intel Corporate
+001517	Intel Corporate
+3C9709	Intel Corporate
+A0A8CD	Intel Corporate
+B496910	Intel
+7C7A91	Intel Corporate
+8CC841	Intel Corporate
+F8633F	Intel Corporate
+000AF7	Broadcom
+001018	Broadcom
+B07FB9	Netgear
+A040A0	Netgear
+204E7F	Netgear
+C03F0E	Netgear
+3C3786	Netgear
+00146C	Netgear
+9C3DCF	Netgear
+E091F5	Netgear
+3894ED	TP-Link Technologies
+50C7BF	TP-Link Technologies
+A42BB0	TP-Link Technologies
+14CC20	TP-Link Technologies
+EC086B	TP-Link Technologies
+B0BE76	TP-Link Technologies
+98DAC4	TP-Link Technologies
+60E327	TP-Link Technologies
+F4EC38	TP-Link Technologies
+001D0F	TP-Link Technologies
+0019E0	TP-Link Technologies
+C46E1F	TP-Link
+50FA84	TP-Link
+00184D	Netgear
+F4CA E5	zte
+002275	Belkin International
+944452	Belkin International
+EC1A59	Belkin/Linksys
+58EF68	Belkin International
+C0560E	Belkin International
+0026F2	Netgear
+6038E0	Belkin
+001CDF	Belkin
+000C43	Ralink/Mediatek
+00E04C	Realtek Semiconductor
+52540A	Realtek
+001F1F	Edimax
+801F02	Edimax Technology
+74DA38	Edimax Technology
+000FB5	Netgear
+00904C	Epson
+A4EE57	Seiko Epson
+001E8F	Canon Inc.
+2477030	Canon
+88512A	Canon
+0021CC	Hewlett Packard (printer)
+3024A9	Hewlett Packard
+9C8E99	Hewlett Packard
+A45D36	Hewlett Packard
+D89D67	Hewlett Packard
+70106F	Hewlett Packard
+001321	Cisco Systems
+00000C	Cisco Systems
+58971E	Cisco Systems
+00:1B:0D	Cisco Systems
+F4CFE2	Cisco Systems
+E8B748	Cisco Systems
+000142	Cisco Systems
+001E13	Cisco Systems
+001A2F	Cisco Systems
+0050BA	D-Link Corporation
+1CBDB9	D-Link International
+28107B	D-Link International
+14D64D	D-Link International
+C8BE19	D-Link
+B8A386	D-Link
+340804	D-Link
+0024010	D-Link
+001CF0	D-Link
+000F3D	D-Link
+ECADB8	Apple (AirPort)
+24A43C	Ubiquiti Networks
+04183DA	Ubiquiti
+788A20	Ubiquiti Networks
+FCECDA	Ubiquiti Networks
+68D79A	Ubiquiti Networks
+802AA8	Ubiquiti Networks
+B4FBE4	Ubiquiti Networks
+DC9FDB	Ubiquiti Networks
+744D28	Routerboard / MikroTik
+4C5E0C	Routerboard.com (MikroTik)
+6416660	MikroTik
+E48D8C	Routerboard / MikroTik
+CC2DE0	MikroTik
+2CC81B	MikroTik
+0011D8	Asustek Computer
+1C872C	Asustek Computer
+AC220B	Asustek Computer
+50465D	Asustek Computer
+04D9F5	Asustek Computer
+2C56DC	Asustek Computer
+088FE0	Asus
+704D7B	Asustek
+386077	Huawei Technologies
+00259E	Huawei Technologies
+48435A	Huawei
+781DBA	Huawei
+ACE215	Huawei
+80717A	Huawei
+E0247F	Huawei
+0022A1	Huawei
+4C1FCC	Huawei
+F8E811	Hon Hai/Foxconn
+9C2A70	Hon Hai Precision
+8C705A	Intel
+001966	Samsung
+0017FA	Microsoft
+0050F2	Microsoft
+7C1E52	Microsoft (Surface/Xbox)
+000D3A	Microsoft
+C83F26	Sony
+FCF152	Sony
+30F9ED	Sony
+0013A9	Sony
+AC9B0A	Amazon Technologies
+FCA667	Amazon Technologies
+44650D	Amazon Technologies
+50DCE7	Amazon Technologies
+68543D	Amazon Technologies
+F0272D2	Amazon
+A002DC	Amazon
+B47C9C	Amazon Technologies
+6837E9	Amazon
+38F73D	Amazon Technologies

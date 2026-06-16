@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PacNScanner
+GenericName=Network Scanner
+Comment=Fast, modern local network scanner
+Exec=pacnscanner
+Icon=pacnscanner
+Terminal=false
+Categories=Network;System;Security;Utility;
+Keywords=network;scanner;nmap;arp;ports;security;inventory;
+StartupWMClass=PacNScanner

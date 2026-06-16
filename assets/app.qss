@@ -1,0 +1,99 @@
+/* PacNScanner — modern, system-theme-friendly stylesheet.
+   Accent derived from the logo turquoise. Palette tokens are substituted at
+   load time by ThemeManager (e.g. @ACCENT@), so this file adapts to light/dark.
+*/
+
+QMainWindow, QDialog {
+    background: @BG@;
+}
+
+QWidget {
+    color: @FG@;
+    font-size: 10pt;
+}
+
+/* Primary action button (Start Scan) */
+QPushButton#primaryAction {
+    background: @ACCENT@;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+QPushButton#primaryAction:hover   { background: @ACCENT_HOVER@; }
+QPushButton#primaryAction:pressed { background: @ACCENT_DARK@; }
+QPushButton#primaryAction:disabled{ background: @MUTED@; color: #e8e8e8; }
+
+QPushButton {
+    background: @CARD@;
+    border: 1px solid @BORDER@;
+    border-radius: 8px;
+    padding: 7px 14px;
+}
+QPushButton:hover  { border-color: @ACCENT@; }
+QPushButton:pressed{ background: @BORDER@; }
+
+/* Dashboard summary cards */
+QFrame#statCard {
+    background: @CARD@;
+    border: 1px solid @BORDER@;
+    border-radius: 14px;
+}
+QLabel#statValue { font-size: 26pt; font-weight: 700; color: @FG@; }
+QLabel#statLabel { color: @MUTED_FG@; font-size: 9pt; }
+QFrame#statCard[accent="true"] { border-color: @ACCENT@; }
+
+/* Device table */
+QTableView {
+    background: @CARD@;
+    alternate-background-color: @ALT_ROW@;
+    gridline-color: @BORDER@;
+    border: 1px solid @BORDER@;
+    border-radius: 12px;
+    selection-background-color: @ACCENT@;
+    selection-color: #ffffff;
+}
+QHeaderView::section {
+    background: @CARD@;
+    color: @MUTED_FG@;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid @BORDER@;
+    font-weight: 600;
+}
+
+QLineEdit, QComboBox, QSpinBox {
+    background: @CARD@;
+    border: 1px solid @BORDER@;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus { border-color: @ACCENT@; }
+
+QProgressBar {
+    border: none;
+    border-radius: 6px;
+    background: @BORDER@;
+    height: 8px;
+    text-align: center;
+}
+QProgressBar::chunk { background: @ACCENT@; border-radius: 6px; }
+
+QToolBar { background: transparent; border: none; spacing: 8px; padding: 6px; }
+QStatusBar { background: transparent; color: @MUTED_FG@; }
+
+QPlainTextEdit#logPanel {
+    background: @CONSOLE_BG@;
+    color: @CONSOLE_FG@;
+    border: 1px solid @BORDER@;
+    border-radius: 10px;
+    font-family: "Cascadia Code", "Consolas", "Menlo", monospace;
+}
+
+QTabBar::tab {
+    background: transparent;
+    padding: 8px 16px;
+    border-bottom: 2px solid transparent;
+}
+QTabBar::tab:selected { border-bottom: 2px solid @ACCENT@; color: @ACCENT@; }
