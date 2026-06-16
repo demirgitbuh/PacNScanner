@@ -1,0 +1,11 @@
+# Normalize text files to LF in the repository.
+* text=auto eol=lf
+
+# Shell scripts must stay LF even on Windows checkouts.
+*.sh text eol=lf
+
+# Treat these as binary (no eol conversion).
+*.png binary
+*.ico binary
+*.icns binary
+*.qm binary
